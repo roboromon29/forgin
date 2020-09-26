@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">  
+  <span>
+    ForginApp
+  </span>
+  <ul class ="ulToolbar"> 
+    <li><a [routerLink]="['/home']"  [routerLinkActive] = "['active']" >Home</a> </li>
+    <li><a [routerLink]="['/register']" [routerLinkActive] = "['active']" >Registro</a> </li>
+  </ul>
+
+
+</mat-toolbar>
+
+
+<section class= "content">
+  <router-outlet></router-outlet>
+</section>
+
+
+

@@ -1,0 +1,57 @@
+
+    <h1>Registro</h1>
+
+    <form class="example-form" #form="ngForm" (ngSubmit) = "onSubmit(form)">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" value="" name="nombre" #nombre = "ngModel" [(ngModel)]= "newRecord.name" required>       
+            <span *ngIf= "nombre.touched && !nombre.valid" > EL nombre es obligatorio</span>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Apellido</mat-label>
+            <input matInput placeholder="Apellido" value="" name = "Apellido"#apellido = "ngModel" [(ngModel)]= "newRecord.lastName" required >
+            <span *ngIf= "apellido.touched && !apellido.valid" > EL apellido es obligatorio</span>
+        </mat-form-field>     
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Telefono</mat-label>      
+            <span matPrefix>+506 &nbsp;</span>
+            <input type="tel" matInput placeholder="88889999" name="telefono" #telefono = "ngModel" [(ngModel)]= "newRecord.phoneNumber" required>
+            <span *ngIf= "telefono.touched && !telefono.valid" > EL telefono es obligatorio</span>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput placeholder="Correo electronico" type ="email" name="correo" #correo = "ngModel" [(ngModel)]= "newRecord.email" required pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$">
+            <span *ngIf= "correo.touched && !correo.valid" > EL correo es obligatorio</span>
+        </mat-form-field> 
+  
+        <mat-form-field>
+            <mat-select class="option" placeholder="Provincia" name="provinceId" #provinceId = "ngModel"  (selectionChange)="provinceChangeAction(provinceId)" [(ngModel)]="newRecord.province" required>
+              <mat-option *ngFor="let prov of province" [value]="prov.id" >{{ prov.Nombre }}</mat-option>
+              <span *ngIf= "telefono.touched && !telefono.valid" > La provincia es obligatoria</span>
+            </mat-select>
+          </mat-form-field>
+
+        <mat-form-field>
+            <mat-select class="option" placeholder="Canton" name="cantonId" #cantonId = "ngModel" (selectionChange)="cantonChanged(cantonId)" [(ngModel)]="newRecord.canton" required>
+                <mat-option *ngFor="let can of canton" [value]="can.id" >{{ can.Nombre }}</mat-option>
+                <span *ngIf= "telefono.touched && !telefono.valid" > El canton es obligatorio</span>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select class="option" placeholder="Distrito" name="districtId" #districtId = "ngModel" (selectionChange) = "districtChanged()" [(ngModel)]="newRecord.distric" required>
+                <mat-option *ngFor="let dis of district" [value]="dis.Canton" >{{ dis.Nombre }}</mat-option>
+                <span *ngIf= "telefono.touched && !telefono.valid" > El distrito es obligatorio</span>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="example-button-row">
+            <button mat-raised-button #guardar color="primary" disabled type="submit" class="disabledBtn"[disabled]="!form.form.valid">Guardar</button>
+            <span *ngIf= "!form.form.valid" > Guardar </span>
+        </div>
+
+    </form> 
